@@ -152,12 +152,22 @@ public class BrainCloudInterface : MonoBehaviour
 
     public void OnEnableRTT()
     {
-        BCConfig._bc.RTTService.EnableRTT(BrainCloud.RTTConnectionType.WEBSOCKET, OnSuccess_RTT, OnError_RTT);
+        BCConfig._bc.CustomEntityService.CreateEntity("athletes", "{\"test\": \"Testing\"}", "{\"test\": \"Testing\"}", null, true, OnSuccess_RTT, OnError_RTT);
     }
 
     public void OnSuccess_RTT(string responseData, object cbObject)
     {
-        statusText = "Connected\n" + responseData;
+        statusText = "Created\n" + responseData;
+        Dictionary<string, object> entityIddict = (Dictionary<string, object>)JsonReader.Deserialize(responseData);//(string)((Dictionary<string, object>)responseData["data"])["entityId"];
+        Debug.Log(entityIddict);
+        Debug.Log(entityIddict.Count);
+        Dictionary<string, object> innerDict = (Dictionary<string, object>)entityIddict["data"];
+        Debug.Log(innerDict);
+        Debug.Log(innerDict.Count);
+        //Dictionary<string, object> response = (Dictionary<string, object>)innerDict["responseData"];
+        Debug.Log(innerDict["entityId"]);
+
+        BCConfig._bc.CustomEntityService.DeleteEntity("athletes", (string)innerDict["entityId"], (int)innerDict["version"], OnSuccess_ChannelConnect, OnError_ChannelConnect);
     }
 
     public void OnError_RTT(int statusCode, int reasonCode, string statusMessage, object cbObject)
@@ -184,7 +194,7 @@ public class BrainCloudInterface : MonoBehaviour
 
     public void OnSuccess_ChannelConnect(string responseData, object cbObject)
     {
-        statusText = "Channel Connected\n" + responseData;
+        statusText = "Deleted!\n" + responseData;
     }
 
     public void OnError_ChannelConnect(int statusCode, int reasonCode, string statusMessage, object cbObject)
