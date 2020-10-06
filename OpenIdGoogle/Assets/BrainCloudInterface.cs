@@ -13,9 +13,18 @@ using Google;
 public class BrainCloudInterface : MonoBehaviour
 {
     //these are simply references to the unity specific canvas system
+    string websocketStatusString = "websocket Logs";
+
+    public void AddLog(string s)
+    {
+        websocketStatusString += "/n" + s;
+    }
+
     Text status;
     Text chatStatus;
     Text rttStatus;
+    Text WebSocketStatus;
+
     string statusText;
     string chatText = "not received";
     string email;
@@ -37,6 +46,7 @@ public class BrainCloudInterface : MonoBehaviour
         status = GameObject.Find("Status").GetComponent<Text>();
         chatStatus = GameObject.Find("ChatStatus").GetComponent<Text>();
         rttStatus = GameObject.Find("RTTStatus").GetComponent<Text>();
+        WebSocketStatus = GameObject.Find("WebSocketStatus").GetComponent<Text>();
 
         configuration = new GoogleSignInConfiguration
         {
@@ -60,6 +70,8 @@ public class BrainCloudInterface : MonoBehaviour
         {
             rttStatus.text = "rtt NOT connected";
         }
+        WebSocketStatus.text = websocketStatusString;
+        
     }
 
     public void OnGoogleSignIn()

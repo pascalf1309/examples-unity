@@ -216,6 +216,7 @@ namespace BrainCloud.Internal
 #else
         private void WebSocket_OnOpen(object sender, EventArgs e)
         {
+            UnityEngine.Debug.Log("BC WEBSOCKET OPEN");
             WebSocket.TCPClient.NoDelay = true;
             WebSocket.TCPClient.Client.NoDelay = true;
             if (OnOpen != null)
@@ -226,6 +227,7 @@ namespace BrainCloud.Internal
 
         private void WebSocket_OnMessage(object sender, MessageEventArgs e)
         {
+            UnityEngine.Debug.Log("BC WEBSOCKET MESSAGE");
             if (OnMessage != null)
             {
                 OnMessage(this, e.RawData);
@@ -234,6 +236,7 @@ namespace BrainCloud.Internal
 
         private void WebSocket_OnError(object sender, ErrorEventArgs e)
         {
+            UnityEngine.Debug.Log("BC WEBSOCKET ERROR");
             if (OnError != null)
             {
                 OnError(this, e.Message);
@@ -242,8 +245,10 @@ namespace BrainCloud.Internal
 
         private void WebSocket_OnClose(object sender, CloseEventArgs e)
         {
+            UnityEngine.Debug.Log("BC WEBSOCKET CLOSE");
             if (OnClose != null)
             {
+                UnityEngine.Debug.Log("ON CLOSE EXISTS");
                 OnClose(this, e.Code, e.Reason);
             }
         }

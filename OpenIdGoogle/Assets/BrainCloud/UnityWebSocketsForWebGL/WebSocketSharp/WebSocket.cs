@@ -42,7 +42,7 @@
 namespace BrainCloud.UnityWebSocketsForWebGL.WebSocketSharp
 {
 
-    using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -55,6 +55,9 @@ using System.Text;
 using System.Threading;
 using BrainCloud.UnityWebSocketsForWebGL.WebSocketSharp.Net;
 using BrainCloud.UnityWebSocketsForWebGL.WebSocketSharp.Net.WebSockets;
+using UnityEngine;
+
+
 
 
   /// <summary>
@@ -73,6 +76,7 @@ using BrainCloud.UnityWebSocketsForWebGL.WebSocketSharp.Net.WebSockets;
   public class WebSocket : IDisposable
   {
         public TcpClient TCPClient { get { return _tcpClient; } }
+        BrainCloudInterface bcinterface = new BrainCloudInterface();
 
         #region Private Fields
 
@@ -2158,6 +2162,9 @@ using BrainCloud.UnityWebSocketsForWebGL.WebSocketSharp.Net.WebSockets;
 
     private void startReceiving ()
     {
+             
+            UnityEngine.Debug.Log("Start Receiving");
+            //bcinterface.AddLog("Start Receiving");
       if (_messageEventQueue.Count > 0)
         _messageEventQueue.Clear ();
 
@@ -2171,8 +2178,9 @@ using BrainCloud.UnityWebSocketsForWebGL.WebSocketSharp.Net.WebSockets;
             _stream,
             false,
             frame => {
-              if (!processReceivedFrame (frame) || _readyState == WebSocketState.Closed) {
-                var exited = _receivingExited;
+                if (!processReceivedFrame (frame) || _readyState == WebSocketState.Closed) {
+                    UnityEngine.Debug.Log("WEBSOCKET Closed");
+                    var exited = _receivingExited;
                 if (exited != null)
                   exited.Set ();
 
@@ -2182,13 +2190,17 @@ using BrainCloud.UnityWebSocketsForWebGL.WebSocketSharp.Net.WebSockets;
               // Receive next asap because the Ping or Close needs a response to it.
               receive ();
 
-              if (_inMessage || !HasMessage || _readyState != WebSocketState.Open)
-                return;
+                if (_inMessage || !HasMessage || _readyState != WebSocketState.Open)
+                {
+                    UnityEngine.Debug.Log("WEBSOCKET OPEN");
+                    return;
+                }
 
               message ();
             },
             ex => {
               _logger.Fatal (ex.ToString ());
+                UnityEngine.Debug.Log("HEEEEERRRREEEEEE FIRRRRRRRRRRSTT");
               fatal ("An exception has occurred while receiving.", ex);
             }
           );
