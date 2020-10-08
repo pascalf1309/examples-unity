@@ -36,7 +36,7 @@ namespace BrainCloud.Internal
         /// <param name="cb_object"></param>
         public void EnableRTT(RTTConnectionType in_connectionType = RTTConnectionType.WEBSOCKET, SuccessCallback in_success = null, FailureCallback in_failure = null, object cb_object = null)
         {
-            if (m_rttConnectionStatus == RTTConnectionStatus.DISCONNECTED)
+            if (!IsRTTEnabled())
             {
                 m_connectedSuccessCallback = in_success;
                 m_connectionFailureCallback = in_failure;
@@ -117,10 +117,6 @@ namespace BrainCloud.Internal
                 for (int i = 0; i < m_queuedRTTCommands.Count; ++i)
                 {
                     toProcessResponse = m_queuedRTTCommands[i];
-                    //UnityEngine.Debug.Log(toProcessResponse.Operation + " OPPPPPPERRATION!");
-                    //UnityEngine.Debug.Log(toProcessResponse.Service + " SERVICE!");
-                    //UnityEngine.Debug.Log(toProcessResponse.JsonMessage + " MESSAGE!");
-                    //UnityEngine.Debug.Log(m_rttConnectionStatus);
 
                     //the rtt websocket has closed and RTT needs to be re-enabled. disconnect is called to fully reset connection 
                     if (m_webSocketStatus == WebsocketStatus.CLOSED)
@@ -137,10 +133,11 @@ namespace BrainCloud.Internal
                     }
 
                     // are we actually connected? only pump this back, when the server says we've connected
-                    else if (m_rttConnectionStatus == RTTConnectionStatus.CONNECTED && m_connectedSuccessCallback != null && toProcessResponse.Operation == "connect")
+                    else if (m_rttConnectionStatus == RTTConnectionStatus.CONNECTING && m_connectedSuccessCallback != null && toProcessResponse.Operation == "connect")
                     {
                         m_lastNowMS = DateTime.Now;
                         m_connectedSuccessCallback(toProcessResponse.JsonMessage, m_connectedObj);
+                        m_rttConnectionStatus = RTTConnectionStatus.CONNECTED;
                     }
 
                     //if we're connected and we get a disconnect - we disconnect the comms... 
@@ -150,7 +147,7 @@ namespace BrainCloud.Internal
                     }
 
                     //If we're connected and there's an error, then there's another problem send back the error
-                    else if (m_rttConnectionStatus == RTTConnectionStatus.CONNECTED && m_connectionFailureCallback != null && toProcessResponse.Operation == "error")
+                    else if (m_rttConnectionStatus == RTTConnectionStatus.CONNECTED || m_rttConnectionStatus == RTTConnectionStatus.CONNECTING && m_connectionFailureCallback != null && toProcessResponse.Operation == "error")
                     {
                         Dictionary<string, object> messageData = (Dictionary<string, object>)JsonReader.Deserialize(toProcessResponse.JsonMessage);
                         m_connectionFailureCallback((int)messageData["status"], (int)messageData["reason_code"], toProcessResponse.JsonMessage, m_connectedObj);
@@ -167,7 +164,7 @@ namespace BrainCloud.Internal
                     else if (m_rttConnectionStatus == RTTConnectionStatus.DISCONNECTED && toProcessResponse.Operation == "connect")
                     {
                         // first time connecting? send the server connection call
-                        m_rttConnectionStatus = RTTConnectionStatus.CONNECTED;
+                        m_rttConnectionStatus = RTTConnectionStatus.CONNECTING;
                         m_lastNowMS = DateTime.Now;
                         send(buildConnectionRequest());
                     }
@@ -176,9 +173,6 @@ namespace BrainCloud.Internal
                         //TODOO
                         m_clientRef.Log("WARNING no handler registered for RTT callbacks ");
                     }
-
-
-                    UnityEngine.Debug.Log(m_rttConnectionStatus);
 
                 }
 
@@ -464,10 +458,8 @@ namespace BrainCloud.Internal
 
         private void addRTTCommandResponse(RTTCommandResponse in_command)
         {
-            UnityEngine.Debug.Log("CALLING ADD!!!!!!!!!");
             lock (m_queuedRTTCommands)
             {
-                UnityEngine.Debug.Log("Adding to response queue!!!!!!!!!");
                 m_queuedRTTCommands.Add(in_command);
             }
         }
