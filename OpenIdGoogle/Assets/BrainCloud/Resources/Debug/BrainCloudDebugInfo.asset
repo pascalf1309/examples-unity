@@ -13,9 +13,129 @@ MonoBehaviour:
   m_Name: BrainCloudDebugInfo
   m_EditorClassIdentifier: 
   DebugInformation:
-    ProfileId: 
-    LastSentRequest: 
-    LastResponse: 
-    FullLog: 
+    ProfileId: 45a7f9f7-3ab8-45f9-b33d-97ee90458a20
+    LastSentRequest: "chat POST_CHAT_MESSAGE_SIMPLE \n{\r\n    \"channelId\": \"23652:gl:valid\",\r\n
+      \   \"text\": \"TEST MESSAGE\",\r\n    \"recordInHistory\": true\r\n}"
+    LastResponse: "OnSuccess \n{\r\n    \"data\": \r\n        {\r\n            \"msgId\":
+      \"820318861836329\"\r\n        },\r\n    \"status\": 200\r\n}"
+    FullLog: 'RTT RECV: {"service":"rtt","operation":"HEARTBEAT","data":null,"evs":"623-f62d47"}
+
+
+      RTT SEND: {"service":"rtt","operation":"HEARTBEAT","data":null}
+
+
+      RESPONSE - 2020-10-08 3:27:57 PM
+
+      {"packetId":4,"responses":[{"data":{"msgId":"820318861836329"},"status":200}]}
+
+
+      RTT RECV: {"service":"chat","operation":"INCOMING","data":{"date":1602185277024,"ver":1,"msgId":"820318861836329","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":"","pic":null},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}}}
+
+
+      REQUEST - 2020-10-08 3:27:57 PM
+
+      {"packetId":4,"sessionId":"50buu7npvf3donue8o43rl1jek","gameId":"23652","messages":[{"service":"chat","operation":"POST_CHAT_MESSAGE_SIMPLE","data":{"channelId":"23652:gl:valid","text":"TEST
+      MESSAGE","recordInHistory":true}}]}
+
+
+      SENDING REQUEST
+
+
+      RESPONSE - 2020-10-08 3:27:43 PM
+
+      {"packetId":3,"responses":[{"data":{"msgId":"820318854793768"},"status":200}]}
+
+
+      RTT RECV: {"service":"chat","operation":"INCOMING","data":{"date":1602185263269,"ver":1,"msgId":"820318854793768","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":"","pic":null},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}}}
+
+
+      REQUEST - 2020-10-08 3:27:43 PM
+
+      {"packetId":3,"sessionId":"50buu7npvf3donue8o43rl1jek","gameId":"23652","messages":[{"service":"chat","operation":"POST_CHAT_MESSAGE_SIMPLE","data":{"channelId":"23652:gl:valid","text":"TEST
+      MESSAGE","recordInHistory":true}}]}
+
+
+      SENDING REQUEST
+
+
+      RESPONSE - 2020-10-08 3:27:39 PM
+
+      {"packetId":2,"responses":[{"data":{"messages":[{"date":1600723592823,"ver":1,"msgId":"819570479525377","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600723629975,"ver":1,"msgId":"819570498547202","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600723659545,"ver":1,"msgId":"819570513687043","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600723765590,"ver":1,"msgId":"819570567982084","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600723847930,"ver":1,"msgId":"819570610140165","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600724464805,"ver":1,"msgId":"819570925980166","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600724831854,"ver":1,"msgId":"819571113909255","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600725819801,"ver":1,"msgId":"819571619738120","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600726156599,"ver":1,"msgId":"819571792178697","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600726881441,"ver":1,"msgId":"819572163297802","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600744539166,"ver":1,"msgId":"819581204053003","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600744852743,"ver":1,"msgId":"819581364604428","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600782042978,"ver":1,"msgId":"819600406004749","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600782077116,"ver":1,"msgId":"819600423483406","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600782375059,"ver":1,"msgId":"819600576030223","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600782477152,"ver":1,"msgId":"819600628301840","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600785831952,"ver":1,"msgId":"819602345959441","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600786413714,"ver":1,"msgId":"819602643821586","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600786465980,"ver":1,"msgId":"819602670581779","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600786575971,"ver":1,"msgId":"819602726897172","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600788106699,"ver":1,"msgId":"819603510629909","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600788736562,"ver":1,"msgId":"819603833119766","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600790138053,"ver":1,"msgId":"819604550683159","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1600957641841,"ver":1,"msgId":"819690312622616","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1601398468788,"ver":1,"msgId":"819916016019481","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1601409952273,"ver":1,"msgId":"819921895563802","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1601410679327,"ver":1,"msgId":"819922267815451","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1601437600041,"ver":1,"msgId":"819936051221020","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1601437606708,"ver":1,"msgId":"819936054634525","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1601450436491,"ver":1,"msgId":"819942623483422","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1602013522621,"ver":1,"msgId":"820230923581983","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1602014586575,"ver":1,"msgId":"820231468326432","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1602015637237,"ver":1,"msgId":"820232006265377","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1602016658164,"ver":1,"msgId":"820232528980002","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1602017339319,"ver":1,"msgId":"820232877731363","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1602017353125,"ver":1,"msgId":"820232884800036","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1602018741822,"ver":1,"msgId":"820233595812901","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1602020306446,"ver":1,"msgId":"820234396900390","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}},{"date":1602182922436,"ver":1,"msgId":"820317656287271","from":{"id":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","name":""},"chId":"23652:gl:valid","content":{"text":"TEST
+      MESSAGE"}}]},"status":200}]}
+
+
+      REQUEST - 2020-10-08 3:27:38 PM
+
+      {"packetId":2,"sessionId":"50buu7npvf3donue8o43rl1jek","gameId":"23652","messages":[{"service":"chat","operation":"CHANNEL_CONNECT","data":{"channelId":"23652:gl:valid","maxReturn":50}}]}
+
+
+      SENDING REQUEST
+
+
+      RTT RECV: {"service":"rtt","operation":"CONNECT","data":{"heartbeatSeconds":30,"cxId":"23652:45a7f9f7-3ab8-45f9-b33d-97ee90458a20:50buu7npvf3donue8o43rl1jek","evs":"623-f62d47"}}
+
+
+      RTT SEND: {"service":"rtt","operation":"CONNECT","data":{"appId":"23652","sessionId":"50buu7npvf3donue8o43rl1jek","profileId":"45a7f9f7-3ab8-45f9-b33d-97ee90458a20","system":{"platform":"WINDOWS","protocol":"ws"},"auth":{"X-APPID":"23652","X-RTT-SECRET":"mysecret1"}}}
+
+
+      RTT: Connection established.
+
+
+      RESPONSE - 2020-10-08 3:27:25 PM
+
+      {"packetId":1,"responses":[{"data":{"endpoints":[{"protocol":"tcp","port":6670,"host":"evstcp-d9b1e0f6247b47e7.elb.us-west-2.amazonaws.com","ssl":false},{"protocol":"ws","port":443,"host":"evswebint.braincloudservers.com","ssl":true}],"auth":{"X-APPID":"23652","X-RTT-SECRET":"mysecret1"}},"status":200}]}
+
+
+      REQUEST - 2020-10-08 3:27:25 PM
+
+      {"packetId":1,"sessionId":"50buu7npvf3donue8o43rl1jek","gameId":"23652","messages":[{"service":"rttRegistration","operation":"REQUEST_CLIENT_CONNECTION","data":null}]}
+
+
+      SENDING REQUEST
+
+
+      RESPONSE - 2020-10-08 3:27:24 PM
+
+      {"packetId":0,"responses":[{"data":{"abTestingId":44,"lastLogin":1602185243831,"server_time":1602185243859,"refundCount":0,"timeZoneOffset":-5.0,"experiencePoints":0,"maxBundleMsgs":10,"createdAt":1600718952115,"parentPro'
     ConsoleLogOffset: {x: 0, y: 0}
   DebugScrollPosition: {x: 0, y: 0}

@@ -143,22 +143,27 @@ namespace BrainCloud.Internal
                         m_connectedSuccessCallback(toProcessResponse.JsonMessage, m_connectedObj);
                     }
 
-                    //if we're connected and we get a disconnect - we disconnect the comms... If there's an error, then there's another problem 
-                    else if (m_bIsConnected && m_connectionFailureCallback != null && toProcessResponse.Operation == "error" || toProcessResponse.Operation == "disconnect")
+                    //if we're connected and we get a disconnect - we disconnect the comms... 
+                    else if (m_bIsConnected && m_connectionFailureCallback != null && toProcessResponse.Operation == "disconnect")
                     {
-                        if (toProcessResponse.Operation == "disconnect")
-                            disconnect();
+                        disconnect();
+                    }
 
+                    //If we're connected and there's an error, then there's another problem send back the error
+                    else if (m_bIsConnected && m_connectionFailureCallback != null && toProcessResponse.Operation == "error")
+                    {
                         Dictionary<string, object> messageData = (Dictionary<string, object>)JsonReader.Deserialize(toProcessResponse.JsonMessage);
                         m_connectionFailureCallback((int)messageData["status"], (int)messageData["reason_code"], toProcessResponse.JsonMessage, m_connectedObj);
                     }
 
                     //if we're not connected and we get a 403 from the server, there's no session and they will need to authenticate
-                    else if (!m_bIsConnected && m_connectionFailureCallback != null && toProcessResponse.Operation == "error" || toProcessResponse.Operation == "disconnect")
+                    else if (!m_bIsConnected && m_connectionFailureCallback != null && toProcessResponse.Operation == "error")
                     {
                         Dictionary<string, object> messageData = (Dictionary<string, object>)JsonReader.Deserialize(toProcessResponse.JsonMessage);
                         m_connectionFailureCallback((int)messageData["status"], (int)messageData["reason_code"], toProcessResponse.JsonMessage, m_connectedObj);
                     }
+
+                    //if we're not connected and we're trying to connect, then start the connection
                     else if (!m_bIsConnected && toProcessResponse.Operation == "connect")
                     {
                         // first time connecting? send the server connection call
@@ -177,7 +182,6 @@ namespace BrainCloud.Internal
                 m_queuedRTTCommands.Clear();
             }
 
-            //////
             if (m_bIsConnected)
             {
                 DateTime nowMS = DateTime.Now;
@@ -191,7 +195,6 @@ namespace BrainCloud.Internal
                     send(buildHeartbeatRequest(), true);
                 }
             }
-            //////
         }
 
         #region private
@@ -451,7 +454,6 @@ namespace BrainCloud.Internal
         /// </summary>
         private void rttConnectionServerError(int status, int reasonCode, string jsonError, object cbObject)
         {
-            // TODO::
             m_bIsConnected = false;
             m_clientRef.Log("RTT Connection Server Error: \n" + jsonError);
             addRTTCommandResponse(new RTTCommandResponse(ServiceName.RTTRegistration.Value.ToLower(), "error", jsonError));

@@ -167,6 +167,11 @@ public class BrainCloudInterface : MonoBehaviour
         BCConfig._bc.RTTService.EnableRTT(BrainCloud.RTTConnectionType.WEBSOCKET, OnSuccess_RTT, OnError_RTT);
     }
 
+    public void OnDisableRTT()
+    {
+        BCConfig._bc.RTTService.DisableRTT();
+    }
+
     public void OnSuccess_RTT(string responseData, object cbObject)
     {
         statusText = "Connected\n" + responseData;
