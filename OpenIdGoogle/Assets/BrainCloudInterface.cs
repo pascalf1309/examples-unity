@@ -150,12 +150,12 @@ public class BrainCloudInterface : MonoBehaviour
         statusText = "Failed to Login to braincloud...\n" + statusMessage + "\n" + reasonCode;
     }
 
-    public void OnEnableRTT()
+    public void OnCreate()
     {
-        BCConfig._bc.CustomEntityService.CreateEntity("athletes", "{\"test\": \"Testing\"}", "{\"test\": \"Testing\"}", null, true, OnSuccess_RTT, OnError_RTT);
+        BCConfig._bc.CustomEntityService.CreateEntity("athletes", "{\"test\": \"Testing\"}", "{\"test\": \"Testing\"}", null, true, OnSuccess_Create, OnError_Create);
     }
 
-    public void OnSuccess_RTT(string responseData, object cbObject)
+    public void OnSuccess_Create(string responseData, object cbObject)
     {
         statusText = "Created\n" + responseData;
         Dictionary<string, object> entityIddict = (Dictionary<string, object>)JsonReader.Deserialize(responseData);//(string)((Dictionary<string, object>)responseData["data"])["entityId"];
@@ -167,55 +167,55 @@ public class BrainCloudInterface : MonoBehaviour
         //Dictionary<string, object> response = (Dictionary<string, object>)innerDict["responseData"];
         Debug.Log(innerDict["entityId"]);
 
-        BCConfig._bc.CustomEntityService.DeleteEntity("athletes", (string)innerDict["entityId"], (int)innerDict["version"], OnSuccess_ChannelConnect, OnError_ChannelConnect);
+        BCConfig._bc.CustomEntityService.DeleteEntity("athletes", (string)innerDict["entityId"], (int)innerDict["version"], OnSuccess_Delete, OnError_Delete);
     }
 
-    public void OnError_RTT(int statusCode, int reasonCode, string statusMessage, object cbObject)
+    public void OnError_Create(int statusCode, int reasonCode, string statusMessage, object cbObject)
     {
         statusText = "Failed to Connect...\n" + statusMessage + "\n" + reasonCode;
     }
 
-    public void OnChannelConnect()
-    {
-        BCConfig._bc.ChatService.ChannelConnect("23652:gl:valid", 50, OnSuccess_ChannelConnect, OnError_ChannelConnect);
+    //public void OnChannelConnect()
+    //{
+    //    BCConfig._bc.ChatService.ChannelConnect("23652:gl:valid", 50, OnSuccess_ChannelConnect, OnError_ChannelConnect);
 
-        // Register for RTT chat
-        BCConfig._bc.RTTService.RegisterRTTChatCallback((string json) =>
-        {
-            var response = JsonReader.Deserialize<Dictionary<string, object>>(json);
-            if (response["service"] as string == "chat" &&
-                response["operation"] as string == "INCOMING")
-            {
-                chatText = "CHAT RECEIVED!!!";
-            }
-        });
-    }
+    //    // Register for RTT chat
+    //    BCConfig._bc.RTTService.RegisterRTTChatCallback((string json) =>
+    //    {
+    //        var response = JsonReader.Deserialize<Dictionary<string, object>>(json);
+    //        if (response["service"] as string == "chat" &&
+    //            response["operation"] as string == "INCOMING")
+    //        {
+    //            chatText = "CHAT RECEIVED!!!";
+    //        }
+    //    });
+    //}
 
 
-    public void OnSuccess_ChannelConnect(string responseData, object cbObject)
+    public void OnSuccess_Delete(string responseData, object cbObject)
     {
         statusText = "Deleted!\n" + responseData;
     }
 
-    public void OnError_ChannelConnect(int statusCode, int reasonCode, string statusMessage, object cbObject)
+    public void OnError_Delete(int statusCode, int reasonCode, string statusMessage, object cbObject)
     {
-        statusText = "Failed to Connect to channel...\n" + statusMessage + "\n" + reasonCode;
+        statusText = "Failed to Delete...\n" + statusMessage + "\n" + reasonCode;
     }
 
-    public void OnChat()
-    {
-        BCConfig._bc.ChatService.PostChatMessageSimple("23652:gl:valid", "TEST MESSAGE", true, OnSuccess_Chat, OnError_Chat);
-    }
+    //public void OnChat()
+    //{
+    //    BCConfig._bc.ChatService.PostChatMessageSimple("23652:gl:valid", "TEST MESSAGE", true, OnSuccess_Chat, OnError_Chat);
+    //}
 
-    public void OnSuccess_Chat(string responseData, object cbObject)
-    {
-        statusText = "Chat success!\n" + responseData;
-    }
+    //public void OnSuccess_Chat(string responseData, object cbObject)
+    //{
+    //    statusText = "Chat success!\n" + responseData;
+    //}
 
-    public void OnError_Chat(int statusCode, int reasonCode, string statusMessage, object cbObject)
-    {
-        statusText = "Chat Failed...\n" + statusMessage + "\n" + reasonCode;
-    }
+    //public void OnError_Chat(int statusCode, int reasonCode, string statusMessage, object cbObject)
+    //{
+    //    statusText = "Chat Failed...\n" + statusMessage + "\n" + reasonCode;
+    //}
 
 
 }
