@@ -118,4 +118,14 @@ public class BrainCloudInterface : MonoBehaviour
         statusText = "Signed out of Google";
     }
 
+    public void OnGooglePurchase()
+    {
+
+    }
+
+    public void OnVerifyPurchase()
+    {
+
+    }
+
 }
