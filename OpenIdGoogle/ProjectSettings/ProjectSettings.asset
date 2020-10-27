@@ -259,7 +259,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/ryanr/Desktop/OpenIdGoogle/OpenIdGoogle.keystore
+  AndroidKeystoreName: '{inproject}: OpenIdGoogle.keystore'
   AndroidKeyaliasName: openidgoogle
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1
@@ -714,6 +714,10 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Build: 0
+    Collab: 0
+    ErrorHub: 0
+    Hub: 0
     UNet: 1
   luminIcon:
     m_Name: 
@@ -734,10 +738,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: cb64486b-200d-4aaa-acb9-a87bbc04b9b6
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: OpenIdGoogle
+  organizationId: ruth0048
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
