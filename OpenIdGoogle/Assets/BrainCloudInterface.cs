@@ -26,7 +26,7 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
     //for purchasing
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
-    public static string kProductIDConsumable = "com.bitheads.OpenIdGoogle.bc_google_orb1";
+    public static string kProductIDConsumable = "bc_google_orb1";
 
     // Use this for initialization
     void Start()
