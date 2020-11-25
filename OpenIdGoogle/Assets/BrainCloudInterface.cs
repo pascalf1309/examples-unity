@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Google.Impl;
 using Google;
 using UnityEngine.Purchasing;
+using BrainCloud.JsonFx.Json;
 
 public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for unity iap
 {
@@ -18,6 +19,20 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
     string email;
     string authCode;
     string idToken;
+
+    //purchase
+    string productId;
+    string orderId;
+    string purchaseToken;
+    string developerPayload;
+
+    //Google info 
+    Dictionary<string, object> wrapper;
+    string store;
+    string payload;
+    Dictionary<string, object> gpDetails;
+    string gpJson;
+    string gpSig;
 
     GoogleSignInConfiguration configuration;
     //the webClientId of our googleOpenId test app. To test your own app, enter in your apps own webClientId
@@ -175,8 +190,39 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
 
     public void OnVerifyPurchase()
     {
+        //if (amazonReceiptId != null)
+        //    BCLogs.GetComponent<Text>().text += "amazonReceiptId = " + amazonReceiptId;
+        //else
+        //    BCLogs.GetComponent<Text>().text += "\namazonReceiptId NULL";
+        //if (amazonUserId != null)
+        //    BCLogs.GetComponent<Text>().text += "\namazonUserId = " + amazonUserId;
+        //else
+        //    BCLogs.GetComponent<Text>().text += "\namazonUserId NULL";
 
+        //string data = "{\"receiptId\":\"" + amazonReceiptId + "\",\"userId\":\"" + amazonUserId + "\"}";
+        //Status.GetComponent<Text>().text += "\ndata" + data;
+
+        Dictionary<string, object> receiptData = new Dictionary<string, object>();
+        receiptData.Add("productId", kProductIDConsumable);
+        receiptData.Add("orderId", "");
+        receiptData.Add("token", "");
+        receiptData.Add("developerPayload", "");
+
+        string receiptDataString = JsonWriter.Serialize(receiptData);
+
+        BCConfig._bc.AppStoreService.VerifyPurchase("googlePlay", receiptDataString, OnSuccess_VerifyPurchase, OnError_VerifyPurchase);
     }
+
+    public void OnSuccess_VerifyPurchase(string responseData, object cbObject)
+    {
+        statusText = "Verified Purchase!\n" + responseData;
+    }
+
+    public void OnError_VerifyPurchase(int statusCode, int reasonCode, string statusMessage, object cbObject)
+    {
+        statusText = "Failed to Verify Purchase...\n" + statusMessage + "\n" + reasonCode;
+    }
+
 
     void BuyProductID(string productId)
     {
@@ -211,6 +257,10 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
         }
     }
 
+    public void OnShowGoogleStats()
+    {
+        statusText = "STORE: " + store +"\nPAYLOAD: " + payload + "\nJSON: " + gpJson + "\nSIGNATURE: " + gpSig;
+    }
 
 
 
@@ -250,7 +300,7 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
     {
         // Purchasing set-up has not succeeded. Check error for reason. Consider sharing this reason with the user.
         statusText = "OnInitializeFailed InitializationFailureReason:" + error;
-        statusText = "blah bala";
+        //statusText = "blah bala";
         //Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
     }
 
@@ -268,6 +318,13 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
             //Debug.Log(string.Format("ProcessPurchase: FAIL. Unrecognized product: '{0}'", args.purchasedProduct.definition.id));
             statusText = "ProcessPurchase: FAIL. Unrecognized product: " + args.purchasedProduct.definition.id;
         }
+
+        wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(args.purchasedProduct.receipt);
+        store = (string)wrapper["Store"];
+        payload = (string)wrapper["Payload"];
+        gpDetails = (Dictionary<string, object>)MiniJson.JsonDecode(payload);
+        gpJson = (string)gpDetails["json"];
+        gpSig = (string)gpDetails["signature"];
 
         // Return a flag indicating whether this product has completely been received, or if the application needs 
         // to be reminded of this purchase at next app launch. Use PurchaseProcessingResult.Pending when still 
