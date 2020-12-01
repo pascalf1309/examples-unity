@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: BrainCloudSettingsManual
   m_EditorClassIdentifier: 
   m_serverURL: https://internal.braincloudservers.com
-  m_secretKey: 45fdc1c0-3ab9-4004-8546-01a40131ad19
-  m_appId: 23652
+  m_secretKey: 4bd1df98-ef9a-422d-8213-c6b22ccc26ff
+  m_appId: 24008
   m_appVersion: 1.0
   m_appIdSecrets:
   - appName: 
-    appId: 23652
-    appSecret: 45fdc1c0-3ab9-4004-8546-01a40131ad19
+    appId: 24008
+    appSecret: 4bd1df98-ef9a-422d-8213-c6b22ccc26ff
   m_enableLogging: 0

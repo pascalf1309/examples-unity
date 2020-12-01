@@ -33,6 +33,7 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
     Dictionary<string, object> gpDetails;
     string gpJson;
     string gpSig;
+    Dictionary<string, object> gpJsonDict;
 
     GoogleSignInConfiguration configuration;
     //the webClientId of our googleOpenId test app. To test your own app, enter in your apps own webClientId
@@ -41,7 +42,7 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
     //for purchasing
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
-    public static string kProductIDConsumable = "bc_google_orb1";
+    public static string kProductIDConsumable = "bc_google_orb2";
 
     // Use this for initialization
     void Start()
@@ -202,11 +203,13 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
         //string data = "{\"receiptId\":\"" + amazonReceiptId + "\",\"userId\":\"" + amazonUserId + "\"}";
         //Status.GetComponent<Text>().text += "\ndata" + data;
 
+        gpJsonDict = (Dictionary<string, object>)MiniJson.JsonDecode(gpJson);
+
         Dictionary<string, object> receiptData = new Dictionary<string, object>();
-        receiptData.Add("productId", kProductIDConsumable);
-        receiptData.Add("orderId", "");
-        receiptData.Add("token", "");
-        receiptData.Add("developerPayload", "");
+        receiptData.Add("productId", gpJsonDict["productId"]);
+        receiptData.Add("orderId", gpJsonDict["orderId"]);
+        receiptData.Add("token", gpJsonDict["purchaseToken"]);
+        receiptData.Add("developerPayload", payload);
 
         string receiptDataString = JsonWriter.Serialize(receiptData);
 
@@ -262,8 +265,27 @@ public class BrainCloudInterface : MonoBehaviour, IStoreListener //needed for un
         statusText = "STORE: " + store +"\nPAYLOAD: " + payload + "\nJSON: " + gpJson + "\nSIGNATURE: " + gpSig;
     }
 
+    public void OnShowJSONStats()
+    {
+        gpJsonDict = (Dictionary<string, object>)MiniJson.JsonDecode(gpJson);
 
+        statusText = "PRODUCTID: " + gpJsonDict["productId"] + "\n:ORDERID " + gpJsonDict["orderId"] + "\nTOKEN: " + gpJsonDict["purchaseToken"];
+    }
 
+    public void OnAuthEmail()
+    {
+        BCConfig._bc.AuthenticateEmailPassword("ryan.daniel.ruth@gmail.com", "password", true, OnSuccess_AuthenticateEmail, OnError_AuthenticateEmail);
+    }
+
+    public void OnSuccess_AuthenticateEmail(string responseData, object cbObject)
+    {
+        statusText = "Logged into braincloud!\n" + responseData;
+    }
+
+    public void OnError_AuthenticateEmail(int statusCode, int reasonCode, string statusMessage, object cbObject)
+    {
+        statusText = "Failed to Login to braincloud...\n" + statusMessage + "\n" + reasonCode;
+    }
 
 
 
